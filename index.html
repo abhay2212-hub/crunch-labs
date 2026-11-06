@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Crunch Lab — A Scroll-Driven Flavor Experience</title>
+<meta name="description" content="Crunch Lab: a cinematic, scroll-driven flavor showcase with 3D-style bags, a flavor wall, Build-a-Box and a hanging rack. Concept project." />
+<meta name="theme-color" content="#C8102E" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body data-tone="dark">
+
+<!-- PRELOADER -->
+<div id="pre" class="pre" aria-live="polite">
+  <canvas id="storm"></canvas>
+  <div class="pre-center">
+    <div class="pre-chip" id="preChip"></div>
+    <div class="pre-pct"><span id="prePct">0</span><small>%</small></div>
+    <div class="pre-label mono" id="preLabel">SLICING POTATOES</div>
+  </div>
+</div>
+
+<!-- FIXED UI -->
+<div class="frame-ui" aria-hidden="true"><i class="plus tl">+</i><i class="plus tr">+</i><i class="plus bl">+</i><i class="plus br">+</i></div>
+
+<header class="nav-wrap">
+  <a href="#flavors" class="logo" aria-label="Crunch Lab home" data-go="flavors">
+    <span class="logo-mark"><b>c</b></span><span class="logo-text mono">CRUNCH LAB</span>
+  </a>
+  <nav class="nav" id="nav" aria-label="Primary">
+    <a href="#flavors" data-sec="flavors" class="on">Flavors</a>
+    <a href="#inside" data-sec="inside">Inside</a>
+    <a href="#shop" data-sec="shop">Shop</a>
+    <a href="#range" data-sec="range">Range</a>
+    <a href="#qa" data-sec="qa">Q&amp;A</a>
+    <a href="#join" data-sec="join">Join</a>
+  </nav>
+  <div class="nav-right">
+    <button class="pill mono" id="snd" aria-pressed="false" aria-label="Toggle crunch sound"><span class="eq"><i></i><i></i><i></i><i></i></span><span id="sndTxt">OFF</span></button>
+    <button class="pill basket" id="basketBtn" aria-label="Basket"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h14l-1.5 10h-11z"/><path d="M9 9a3 3 0 0 1 6 0"/></svg><span class="dots" id="dots"><i></i><i></i><i></i></span></button>
+    <a class="cta-pill" href="#join" data-go="join">First dibs</a>
+  </div>
+</header>
+<div class="toast" id="toast" role="status"></div>
+
+<main>
+  <!-- THEMED: hero + story + storm -->
+  <div class="themed" id="themed">
+    <div class="rings prev" id="ringsPrev"></div>
+    <div class="rings next" id="ringsNext"></div>
+    <div class="vignette"></div>
+
+    <!-- HERO -->
+    <section id="flavors" class="hero" data-tone="dark">
+      <p class="hint mono">DRAG TO BROWSE &nbsp;•&nbsp; CLICK TO ZOOM &nbsp;•&nbsp; SCROLL TO EXPLORE</p>
+      <div class="floaters" id="floaters"></div>
+      <div class="stage" id="stage"></div>
+      <button class="arrow prev" id="prev" aria-label="Previous flavor"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg></button>
+      <button class="arrow next" id="next" aria-label="Next flavor"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></button>
+      <div class="shadow-ellipse"></div>
+      <h1 class="hero-title" id="heroTitle" aria-live="polite"></h1>
+      <div class="hero-num" id="heroNum" aria-hidden="true">01</div>
+      <button class="autoplay mono" id="auto" aria-pressed="true"><span class="ap-ic"><i></i><i></i></span>AUTOPLAY</button>
+      <p class="hero-tag" id="heroTag"></p>
+    </section>
+
+    <!-- STORY -->
+    <section id="inside" class="story" data-tone="dark">
+      <div class="story-pin">
+        <div class="backword" id="backword" aria-hidden="true">BAG</div>
+        <div class="story-chips" id="storyChips" aria-hidden="true"></div>
+        <div class="story-copy">
+          <div class="chbar"><b class="mono" id="chNow">01</b><span class="chline"><i id="chFill"></i></span><em class="mono">04</em></div>
+          <p class="mono ch-kicker"><span></span><b id="chKick">CHAPTER 01 — THE BAG</b></p>
+          <h2 class="ch-title" id="chTitle">BUILT TO<br>PROTECT</h2>
+          <p class="ch-text" id="chText"></p>
+        </div>
+        <div class="story-bag-wrap" id="storyBagWrap">
+          <div class="story-bag" id="storyBag"></div>
+          <div class="hot h1" data-i="0"><i class="pin"></i><span class="mono"></span><em></em></div>
+          <div class="hot h2" data-i="1"><i class="pin"></i><span class="mono"></span><em></em></div>
+          <div class="hot h3" data-i="2"><i class="pin"></i><span class="mono"></span><em></em></div>
+        </div>
+        <div class="chicons" id="chIcons"></div>
+      </div>
+    </section>
+
+    <!-- STORM -->
+    <section id="storm-sec" class="stormsec" data-tone="dark">
+      <div class="storm-chips" id="stormChips" aria-hidden="true"></div>
+      <h2 class="storm-title">EVERY BAG<br><span>IS A STORM</span></h2>
+      <p class="storm-sub">Hundreds of golden slices, one satisfying tear. Scroll on — the good part is the shelf.</p>
+    </section>
+  </div>
+
+  <!-- SHOP: WALL -->
+  <section id="shop" class="wall" data-tone="light">
+    <p class="mono kicker">THE WALL — PICK A BAG, ANY BAG</p>
+    <h2 class="big">GRAB<br>A BAG</h2>
+    <p class="wall-note">Tilt a card, press it, poke the bag. Hit <i class="plus-dot">+</i> to drop a flavor into your box.</p>
+    <div class="wall-grid" id="wallGrid"></div>
+  </section>
+
+  <!-- BUILD A BOX -->
+  <section id="box" class="box" data-tone="dark">
+    <div class="box-left">
+      <p class="mono kicker">BUILD-A-BOX — CONCEPT STORE</p>
+      <h2 class="box-title">BUILD YOUR <span class="num3">3</span> PACK &amp;<br><em>SAVE $1.49</em></h2>
+      <div class="picker" id="picker"></div>
+      <p class="mono box-hint">TAP A BAG — OR DRAG IT INTO THE TRAY</p>
+    </div>
+    <div class="box-right" id="tray">
+      <div class="tray-disc"></div>
+      <div class="tray-slots" id="traySlots"></div>
+      <button class="add-basket" id="addBasket" disabled>
+        <span class="ab-t" id="abT">PICK 3 TO SAVE</span>
+        <span class="ab-p"><s>$7.47</s> <b>$5.98</b></span>
+      </button>
+      <p class="mono concept">CONCEPT ONLY — NOTHING IS CHARGED</p>
+    </div>
+  </section>
+
+  <!-- RACK -->
+  <section id="range" class="rack" data-tone="light">
+    <div class="rack-bg" aria-hidden="true"><span>THE RACK</span></div>
+    <p class="mono kicker">THE RACK — 09 FLAVORS</p>
+    <h2 class="big">PICK YOUR<br>CRUNCH</h2>
+    <p class="rack-note">Drag the rail to browse. Run your cursor through the bags. Tap one to spin it on its hook.</p>
+    <div class="rod"></div>
+    <div class="rack-view" id="rackView"><div class="rack-track" id="rackTrack"></div></div>
+    <div class="rack-foot">
+      <div class="rack-count mono" id="rackCount">01 / 09</div>
+      <div class="ruler" id="ruler"><div class="ruler-track" id="rulerTrack"></div><i class="needle"></i></div>
+      <div class="rack-drag mono">DRAG THE WHEEL</div>
+    </div>
+  </section>
+
+  <!-- Q&A -->
+  <section id="qa" class="qa" data-tone="light">
+    <div class="qa-head"><p class="mono kicker">Q&amp;A — THE FINE PRINT</p><h2 class="big sm">ASK<br>AWAY</h2></div>
+    <div class="qa-list" id="qaList"></div>
+  </section>
+
+  <!-- JOIN -->
+  <section id="join" class="join" data-tone="dark">
+    <div class="join-card">
+      <p class="mono kicker">FIRST DIBS</p>
+      <h2 class="join-title">BE FIRST<br>TO <em>CRUNCH</em></h2>
+      <p class="join-sub">Drop your email and we’ll tell you the moment a new flavor leaves the lab. (Concept project — nothing is stored.)</p>
+      <form class="join-form" id="joinForm" novalidate>
+        <input type="email" id="joinEmail" placeholder="you@email.com" aria-label="Email address" required />
+        <button type="submit">Get first dibs</button>
+      </form>
+      <p class="join-msg mono" id="joinMsg" role="status"></p>
+    </div>
+    <footer class="foot mono">
+      <span>© <span id="yr">2026</span> CRUNCH LAB — a concept / portfolio project</span>
+      <span>Independent design. Not affiliated with any snack brand.</span>
+      <a href="#flavors" data-go="flavors">BACK TO TOP ↑</a>
+    </footer>
+  </section>
+</main>
+
+<script src="js/lenis.min.js"></script>
+<script src="js/flavors.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
